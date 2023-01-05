@@ -1,5 +1,5 @@
 {
-  "name": "tiny-path",
+  "name": "tiny-paths",
   "version": "1.0.0",
   "description": "path for platforms without path",
   "main": "index.js",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/holepunchto/tiny-path.git"
+    "url": "https://github.com/holepunchto/tiny-paths.git"
   },
   "author": "Mathias Buus (@mafintosh)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/holepunchto/tiny-path/issues"
+    "url": "https://github.com/holepunchto/tiny-paths/issues"
   },
-  "homepage": "https://github.com/holepunchto/tiny-path"
+  "homepage": "https://github.com/holepunchto/tiny-paths"
 }
