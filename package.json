@@ -1,6 +1,6 @@
 {
   "name": "tiny-paths",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "path for platforms without path",
   "main": "index.js",
   "devDependencies": {
