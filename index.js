@@ -104,7 +104,7 @@ function makePath (windows) {
 
       if (part === '..') {
         const l = out.lastIndexOf(sep)
-        if (l === -1 || (isAbsolute || out.slice(l + 1) === '..')) {
+        if (l === -1 || out.slice(l + 1) === '..') {
           if (isAbsolute) out = ''
           else out += out ? sep + '..' : '..'
         } else {
