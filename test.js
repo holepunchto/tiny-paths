@@ -12,7 +12,7 @@ test('export based on platform', function (t) {
   }
 })
 
-test('basename', async function (t) {
+test('basename', function (t) {
   t.is(pearPath.basename('/tmp/file.html'), nodePath.basename('/tmp/file.html'))
   t.is(pearPath.basename('C:\\temp\\file.html'), nodePath.basename('C:\\temp\\file.html'))
 
@@ -20,12 +20,12 @@ test('basename', async function (t) {
   t.is(pearPath.basename('C:\\temp\\file.html\\'), nodePath.basename('C:\\temp\\file.html\\'))
 })
 
-test('basename suffix', async function (t) {
+test('basename suffix', function (t) {
   t.is(pearPath.basename('/tmp/file.html', '.html'), nodePath.basename('/tmp/file.html', '.html'))
   t.is(pearPath.basename('C:\\temp\\file.html', '.html'), nodePath.basename('C:\\temp\\file.html', '.html'))
 })
 
-test('basename suffix is case-sensitive', async function (t) {
+test('basename suffix is case-sensitive', function (t) {
   t.is(pearPath.basename('/tmp/file.HTML', '.html'), nodePath.basename('/tmp/file.HTML', '.html'))
   t.is(pearPath.basename('C:\\temp\\file.HTML', '.html'), nodePath.basename('C:\\temp\\file.HTML', '.html'))
 })
