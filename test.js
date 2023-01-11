@@ -13,21 +13,21 @@ test('export based on platform', function (t) {
 })
 
 test('basename', function (t) {
-  t.is(pearPath.basename('/tmp/file.html'), nodePath.basename('/tmp/file.html'))
-  t.is(pearPath.basename('C:\\temp\\file.html'), nodePath.basename('C:\\temp\\file.html'))
+  t.is(pearPath.posix.basename('/tmp/file.html'), nodePath.posix.basename('/tmp/file.html'))
+  t.is(pearPath.win32.basename('C:\\temp\\file.html'), nodePath.win32.basename('C:\\temp\\file.html'))
 
-  t.is(pearPath.basename('/tmp/file.html/'), nodePath.basename('/tmp/file.html/'))
-  t.is(pearPath.basename('C:\\temp\\file.html\\'), nodePath.basename('C:\\temp\\file.html\\'))
+  t.is(pearPath.posix.basename('/tmp/file.html/'), nodePath.posix.basename('/tmp/file.html/'))
+  t.is(pearPath.win32.basename('C:\\temp\\file.html\\'), nodePath.win32.basename('C:\\temp\\file.html\\'))
 })
 
 test('basename suffix', function (t) {
-  t.is(pearPath.basename('/tmp/file.html', '.html'), nodePath.basename('/tmp/file.html', '.html'))
-  t.is(pearPath.basename('C:\\temp\\file.html', '.html'), nodePath.basename('C:\\temp\\file.html', '.html'))
+  t.is(pearPath.posix.basename('/tmp/file.html', '.html'), nodePath.posix.basename('/tmp/file.html', '.html'))
+  t.is(pearPath.win32.basename('C:\\temp\\file.html', '.html'), nodePath.win32.basename('C:\\temp\\file.html', '.html'))
 })
 
 test('basename suffix is case-sensitive', function (t) {
-  t.is(pearPath.basename('/tmp/file.HTML', '.html'), nodePath.basename('/tmp/file.HTML', '.html'))
-  t.is(pearPath.basename('C:\\temp\\file.HTML', '.html'), nodePath.basename('C:\\temp\\file.HTML', '.html'))
+  t.is(pearPath.posix.basename('/tmp/file.HTML', '.html'), nodePath.posix.basename('/tmp/file.HTML', '.html'))
+  t.is(pearPath.win32.basename('C:\\temp\\file.HTML', '.html'), nodePath.win32.basename('C:\\temp\\file.HTML', '.html'))
 })
 
 test('delimiter', function (t) {
@@ -35,11 +35,11 @@ test('delimiter', function (t) {
 })
 
 test('dirname', function (t) {
-  t.is(pearPath.dirname('/foo/bar/baz/asdf/quux'), nodePath.dirname('/foo/bar/baz/asdf/quux'))
-  t.is(pearPath.dirname('C:\\foo\\bar\\baz\\asdf\\quux'), nodePath.dirname('C:\\foo\\bar\\baz\\asdf\\quux'))
+  t.is(pearPath.posix.dirname('/foo/bar/baz/asdf/quux'), nodePath.posix.dirname('/foo/bar/baz/asdf/quux'))
+  t.is(pearPath.win32.dirname('C:\\foo\\bar\\baz\\asdf\\quux'), nodePath.win32.dirname('C:\\foo\\bar\\baz\\asdf\\quux'))
 
-  t.is(pearPath.dirname('/foo/bar/'), nodePath.dirname('/foo/bar/'))
-  t.is(pearPath.dirname('C:\\foo\\bar\\'), nodePath.dirname('C:\\foo\\bar\\'))
+  t.is(pearPath.posix.dirname('/foo/bar/'), nodePath.posix.dirname('/foo/bar/'))
+  t.is(pearPath.win32.dirname('C:\\foo\\bar\\'), nodePath.win32.dirname('C:\\foo\\bar\\'))
 })
 
 test('extname', function (t) {
@@ -57,34 +57,34 @@ test('isAbsolute', function (t) {
   t.is(pearPath.isAbsolute(''), nodePath.isAbsolute(''))
   t.is(pearPath.isAbsolute('.'), nodePath.isAbsolute('.'))
 
-  t.is(pearPath.isAbsolute('/foo/bar'), nodePath.isAbsolute('/foo/bar'))
-  t.is(pearPath.isAbsolute('/baz/..'), nodePath.isAbsolute('/baz/..'))
-  t.is(pearPath.isAbsolute('qux/'), nodePath.isAbsolute('qux/'))
+  t.is(pearPath.posix.isAbsolute('/foo/bar'), nodePath.posix.isAbsolute('/foo/bar'))
+  t.is(pearPath.posix.isAbsolute('/baz/..'), nodePath.posix.isAbsolute('/baz/..'))
+  t.is(pearPath.posix.isAbsolute('qux/'), nodePath.posix.isAbsolute('qux/'))
 
-  t.is(pearPath.isAbsolute('//server'), nodePath.isAbsolute('//server'))
-  t.is(pearPath.isAbsolute('\\\\server'), nodePath.isAbsolute('\\\\server'))
-  t.is(pearPath.isAbsolute('C:/foo/..'), nodePath.isAbsolute('C:/foo/..'))
-  t.is(pearPath.isAbsolute('C:\\foo\\..'), nodePath.isAbsolute('C:\\foo\\..'))
-  t.is(pearPath.isAbsolute('bar\\baz'), nodePath.isAbsolute('bar\\baz'))
-  t.is(pearPath.isAbsolute('bar/baz'), nodePath.isAbsolute('bar/baz'))
+  t.is(pearPath.posix.isAbsolute('//server'), nodePath.posix.isAbsolute('//server'))
+  t.is(pearPath.win32.isAbsolute('\\\\server'), nodePath.win32.isAbsolute('\\\\server'))
+  t.is(pearPath.win32.isAbsolute('C:/foo/..'), nodePath.win32.isAbsolute('C:/foo/..'))
+  t.is(pearPath.win32.isAbsolute('C:\\foo\\..'), nodePath.win32.isAbsolute('C:\\foo\\..'))
+  t.is(pearPath.win32.isAbsolute('bar\\baz'), nodePath.win32.isAbsolute('bar\\baz'))
+  t.is(pearPath.posix.isAbsolute('bar/baz'), nodePath.posix.isAbsolute('bar/baz'))
 })
 
 test('join', function (t) {
   t.is(pearPath.join('', ''), nodePath.join('', ''))
 
-  t.is(pearPath.join('/foo', 'bar', 'baz/asdf', 'quux', '..'), nodePath.join('/foo', 'bar', 'baz/asdf', 'quux', '..'))
-  t.is(pearPath.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'), nodePath.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'))
+  t.is(pearPath.posix.join('/foo', 'bar', 'baz/asdf', 'quux', '..'), nodePath.posix.join('/foo', 'bar', 'baz/asdf', 'quux', '..'))
+  t.is(pearPath.win32.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'), nodePath.win32.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'))
 })
 
 test('normalize', function (t) {
   t.is(pearPath.normalize(''), nodePath.normalize(''))
 
-  t.is(pearPath.normalize('/foo/bar//baz/asdf/quux/..'), nodePath.normalize('/foo/bar//baz/asdf/quux/..'))
-  t.is(pearPath.normalize('C:\\temp\\\\foo\\bar\\..\\'), nodePath.normalize('C:\\temp\\\\foo\\bar\\..\\'))
+  t.is(pearPath.posix.normalize('/foo/bar//baz/asdf/quux/..'), nodePath.posix.normalize('/foo/bar//baz/asdf/quux/..'))
+  t.is(pearPath.win32.normalize('C:\\temp\\\\foo\\bar\\..\\'), nodePath.win32.normalize('C:\\temp\\\\foo\\bar\\..\\'))
 
-  t.is(pearPath.normalize('/tmp/dir/'), nodePath.normalize('/tmp/dir/'))
-  t.is(pearPath.normalize('C:\\temp\\\\dir\\'), nodePath.normalize('C:\\temp\\\\dir\\'))
-  t.is(pearPath.normalize('C:\\temp\\\\dir\\/'), nodePath.normalize('C:\\temp\\\\dir\\/'))
+  t.is(pearPath.posix.normalize('/tmp/dir/'), nodePath.posix.normalize('/tmp/dir/'))
+  t.is(pearPath.win32.normalize('C:\\temp\\\\dir\\'), nodePath.win32.normalize('C:\\temp\\\\dir\\'))
+  t.is(pearPath.win32.normalize('C:\\temp\\\\dir\\/'), nodePath.win32.normalize('C:\\temp\\\\dir\\/'))
 
   t.is(pearPath.win32.normalize('C:////temp\\\\/\\/\\/foo/bar'), nodePath.win32.normalize('C:////temp\\\\/\\/\\/foo/bar'))
 })
@@ -98,10 +98,10 @@ test('resolve', function (t) {
   t.is(pearPath.resolve(''), nodePath.resolve(''))
   t.is(pearPath.resolve('', ''), nodePath.resolve('', ''))
 
-  t.is(pearPath.resolve('/foo/bar', '', './baz', ''), nodePath.resolve('/foo/bar', '', './baz', ''))
-  t.is(pearPath.resolve('/foo/bar', './baz'), nodePath.resolve('/foo/bar', './baz'))
-  t.is(pearPath.resolve('/foo/bar', '/tmp/file/'), nodePath.resolve('/foo/bar', '/tmp/file/'))
-  t.is(pearPath.resolve('wwwroot', 'static_files/png/', '../gif/image.gif'), nodePath.resolve('wwwroot', 'static_files/png/', '../gif/image.gif'))
+  t.is(pearPath.posix.resolve('/foo/bar', '', './baz', ''), nodePath.posix.resolve('/foo/bar', '', './baz', ''))
+  t.is(pearPath.posix.resolve('/foo/bar', './baz'), nodePath.posix.resolve('/foo/bar', './baz'))
+  t.is(pearPath.posix.resolve('/foo/bar', '/tmp/file/'), nodePath.posix.resolve('/foo/bar', '/tmp/file/'))
+  t.is(pearPath.posix.resolve('wwwroot', 'static_files/png/', '../gif/image.gif'), nodePath.posix.resolve('wwwroot', 'static_files/png/', '../gif/image.gif'))
 
   t.is(pearPath.win32.resolve('C:\\'), nodePath.win32.resolve('C:\\'))
   t.is(pearPath.win32.resolve('C:'), nodePath.win32.resolve('C:'))
