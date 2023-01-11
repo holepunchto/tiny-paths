@@ -9,6 +9,7 @@ module.exports = process.platform === 'win32' ? win32 : posix
 function makePath (windows) {
   const path = {}
   const sep = path.sep = windows ? '\\' : '/'
+  path.delimiter = windows ? ';' : ':'
 
   if (windows) {
     path.isAbsolute = function isAbsolute (p) {
