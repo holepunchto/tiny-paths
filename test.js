@@ -2,12 +2,6 @@ const test = require('brittle')
 const nodePath = require('path')
 const pearPath = require('./index.js')
 
-/*
-node:
-C:\\foo.html and C:\\foo.HTML refer to the same file
-Trailing directory separators are ignored
-*/
-
 test('export based on platform', function (t) {
   if (process.platform === 'win32') {
     t.is(pearPath, pearPath.win32)
@@ -19,27 +13,21 @@ test('export based on platform', function (t) {
 })
 
 test('basename', async function (t) {
-  const filenamePosix = '/tmp/file.html'
-  const filenameWin32 = 'C:\\temp\\file.html'
+  t.is(pearPath.basename('/tmp/file.html'), nodePath.basename('/tmp/file.html'))
+  t.is(pearPath.basename('C:\\temp\\file.html'), nodePath.basename('C:\\temp\\file.html'))
 
-  t.is(pearPath.basename(filenamePosix), nodePath.basename(filenamePosix))
-  t.is(pearPath.basename(filenameWin32), nodePath.basename(filenameWin32))
+  t.is(pearPath.basename('/tmp/file.html/'), nodePath.basename('/tmp/file.html/'))
+  t.is(pearPath.basename('C:\\temp\\file.html\\'), nodePath.basename('C:\\temp\\file.html\\'))
 })
 
 test('basename suffix', async function (t) {
-  const filenamePosix = '/tmp/file.html'
-  const filenameWin32 = 'C:\\temp\\file.html'
-
-  t.is(pearPath.basename(filenamePosix, '.html'), nodePath.basename(filenamePosix, '.html'))
-  t.is(pearPath.basename(filenameWin32, '.html'), nodePath.basename(filenameWin32, '.html'))
+  t.is(pearPath.basename('/tmp/file.html', '.html'), nodePath.basename('/tmp/file.html', '.html'))
+  t.is(pearPath.basename('C:\\temp\\file.html', '.html'), nodePath.basename('C:\\temp\\file.html', '.html'))
 })
 
 test('basename suffix is case-sensitive', async function (t) {
-  const filenamePosix = '/tmp/file.HTML'
-  const filenameWin32 = 'C:\\temp\\file.HTML'
-
-  t.is(pearPath.basename(filenamePosix, '.html'), nodePath.basename(filenamePosix, '.html'))
-  t.is(pearPath.basename(filenameWin32, '.html'), nodePath.basename(filenameWin32, '.html'))
+  t.is(pearPath.basename('/tmp/file.HTML', '.html'), nodePath.basename('/tmp/file.HTML', '.html'))
+  t.is(pearPath.basename('C:\\temp\\file.HTML', '.html'), nodePath.basename('C:\\temp\\file.HTML', '.html'))
 })
 
 test('delimiter', function (t) {
@@ -47,12 +35,11 @@ test('delimiter', function (t) {
 })
 
 test('dirname', function (t) {
-  const dirnamePosix = '/foo/bar/baz/asdf/quux'
-  const dirnameWin32 = 'C:\\foo\\bar\\baz\\asdf\\quux'
+  t.is(pearPath.dirname('/foo/bar/baz/asdf/quux'), nodePath.dirname('/foo/bar/baz/asdf/quux'))
+  t.is(pearPath.dirname('C:\\foo\\bar\\baz\\asdf\\quux'), nodePath.dirname('C:\\foo\\bar\\baz\\asdf\\quux'))
 
-  // + Trailing directory separators are ignored
-  t.is(pearPath.dirname(dirnamePosix), nodePath.dirname(dirnamePosix))
-  t.is(pearPath.dirname(dirnameWin32), nodePath.dirname(dirnameWin32))
+  t.is(pearPath.dirname('/foo/bar/'), nodePath.dirname('/foo/bar/'))
+  t.is(pearPath.dirname('C:\\foo\\bar\\'), nodePath.dirname('C:\\foo\\bar\\'))
 })
 
 test('extname', function (t) {
