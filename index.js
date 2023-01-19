@@ -4,7 +4,9 @@ const win32 = makePath(true)
 posix.win32 = win32
 win32.posix = posix
 
-module.exports = process.platform === 'win32' ? win32 : posix
+module.exports = typeof process === 'object' && process.platform === 'win32'
+  ? win32
+  : posix
 
 function makePath (windows) {
   const path = {}
