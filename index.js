@@ -13,6 +13,7 @@ function makePath (windows) {
   path.win32 = path
 
   const sep = path.sep = windows ? '\\' : '/'
+  path.delimiter = windows ? ';' : ':'
 
   if (windows) {
     path.isAbsolute = function isAbsolute (p) {
